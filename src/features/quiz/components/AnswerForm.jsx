@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-paper';
 
 const AnswerForm = ({ answers }) => {
@@ -14,11 +14,13 @@ const AnswerForm = ({ answers }) => {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={Answer === 'A' ? styles.focusAnswer : styles.answer} onPress={() => handlePressAnswer('A')}>
-          {answers.A}
-        </Text>
-      </View>
+      <TouchableHighlight>
+        <View>
+          <Text style={Answer === 'A' ? styles.focusAnswer : styles.answer} onPress={() => handlePressAnswer('A')}>
+            {answers.A}
+          </Text>
+        </View>
+      </TouchableHighlight>
       <View>
         <Text style={Answer === 'B' ? styles.focusAnswer : styles.answer} onPress={() => handlePressAnswer('B')}>
           {answers.B}
@@ -44,18 +46,25 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   answer: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-    border: '5px solid black',
+    color: '#fefbff',
+    fontSize: 16,
     margin: 10,
+    borderWidth: 2,
+    borderColor: '#272c33',
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    borderRadius: 5,
   },
   focusAnswer: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: 30,
-    border: '5px solid black',
+    color: '#fefbff',
+    fontSize: 16,
     margin: 10,
+    borderWidth: 2,
+    borderColor: '#272c33',
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    borderRadius: 5,
+    backgroundColor: '#161b22',
   },
 });
 

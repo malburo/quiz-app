@@ -1,25 +1,19 @@
 import json2md from 'json2md';
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { View } from 'react-native';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import SyntaxHighlighter from 'react-native-syntax-highlighter'; // 2.0.0
+import { dracula } from 'react-syntax-highlighter/styles/hljs'; // 7.0.1
 
-const renderers = {
-  code: ({ language, value }) => {
-    return (
-      <View>
-        <SyntaxHighlighter
-          style={dracula}
-          language={language}
-          children={value}
-          customStyle={{ margin: 0, fontSize: 14, borderRadius: 0 }}
-        />
-      </View>
-    );
-  },
-};
-const Question = ({ content }) => {
-  return <ReactMarkdown renderers={renderers} children={json2md(content)} />;
+const Question = ({ question }) => {
+  return (
+    <SyntaxHighlighter
+      style={dracula}
+      customStyle={{ padding: 20, marginTop: 100 }}
+      language={question.code.language}
+      fontSize={18}
+      highlighter="hljs"
+    >
+      {json2md(question.code.content)}
+    </SyntaxHighlighter>
+  );
 };
 export default Question;
