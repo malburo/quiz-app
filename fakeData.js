@@ -1,20 +1,29 @@
 export const QUESTIONS_DATA = [
   {
     id: 'id1',
-    content: [
-      { p: 'Below you can see a code block example.' },
-      {
-        code: {
-          language: 'js',
-          content: ['function sum (a, b) {', '   return a + b', '}', 'sum(1, 2)'],
-        },
+    question: {
+      title: 'title',
+      code: {
+        language: 'js',
+        content: [
+          'function a(x) {',
+          '  x++;}',
+          '  return function () {',
+          '    console.log(++x);',
+          '  };',
+          '}',
+          '',
+          'a(1)();',
+          'a(1)();',
+          'a(1)();',
+        ],
       },
-    ],
+    },
     answers: {
-      A: '1',
-      B: '2',
-      C: '3',
-      D: '4',
+      A: '1, 2, 3 and 1, 2, 3',
+      B: '3, 3, 3 and 3, 4, 5',
+      C: '3, 3, 3 and 1, 2, 3',
+      D: '1, 2, 3 and 3, 3, 3',
     },
   },
 ];
