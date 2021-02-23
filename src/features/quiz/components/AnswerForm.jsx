@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
 const AnswerForm = ({ answers }) => {
@@ -14,13 +14,11 @@ const AnswerForm = ({ answers }) => {
   };
   return (
     <View style={styles.container}>
-      <TouchableHighlight>
-        <View>
-          <Text style={Answer === 'A' ? styles.focusAnswer : styles.answer} onPress={() => handlePressAnswer('A')}>
-            {answers.A}
-          </Text>
-        </View>
-      </TouchableHighlight>
+      <View>
+        <Text style={Answer === 'A' ? styles.focusAnswer : styles.answer} onPress={() => handlePressAnswer('A')}>
+          {answers.A}
+        </Text>
+      </View>
       <View>
         <Text style={Answer === 'B' ? styles.focusAnswer : styles.answer} onPress={() => handlePressAnswer('B')}>
           {answers.B}

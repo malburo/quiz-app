@@ -7,7 +7,7 @@ const Question = ({ question }) => {
   return (
     <SyntaxHighlighter
       style={dracula}
-      customStyle={{ padding: 20, marginTop: 100 }}
+      customStyle={{ padding: 20, marginTop: 20 }}
       language={question.code.language}
       fontSize={18}
       highlighter="hljs"
