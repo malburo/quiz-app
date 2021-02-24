@@ -13,7 +13,14 @@ const InputField = (props) => {
       error={hasError}
       disabled={disabled}
       placeholder={placeholder}
-      as={<TextInput />}
+      render={(props) => (
+        <TextInput
+          {...props}
+          onChangeText={(value) => {
+            props.onChange(value);
+          }}
+        />
+      )}
     />
   );
 };

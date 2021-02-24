@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import InputField from '../../../components/form-control/InputField';
 import PasswordField from '../../../components/form-control/PasswordField';
@@ -18,7 +18,7 @@ const RegisterForm = (props) => {
     console.log(values);
   };
   return (
-    <form>
+    <View>
       <InputField form={form} name="fullname" label="fullname" />
       <InputField form={form} name="username" label="username" />
       <InputField form={form} name="email" label="email" />
@@ -26,7 +26,7 @@ const RegisterForm = (props) => {
       <Button type="submit" mode="contained" onPress={form.handleSubmit(handleSubmit)}>
         Register now
       </Button>
-    </form>
+    </View>
   );
 };
 

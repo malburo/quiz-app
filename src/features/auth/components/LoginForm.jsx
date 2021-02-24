@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import InputField from '../../../components/form-control/inputField';
+import InputField from '../../../components/form-control/InputField';
 import PasswordField from '../../../components/form-control/PasswordField';
 
 const LoginForm = (props) => {
@@ -16,13 +16,13 @@ const LoginForm = (props) => {
     console.log(values);
   };
   return (
-    <form>
+    <View>
       <InputField form={form} name="username" label="username" />
       <PasswordField form={form} name="password" label="password" />
       <Button type="submit" mode="contained" onPress={form.handleSubmit(handleSubmit)}>
         Login now
       </Button>
-    </form>
+    </View>
   );
 };
 
