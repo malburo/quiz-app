@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Text, View } from 'react-native';
+import Button from '../../../components/Button';
 import InputField from '../../../components/form-control/InputField';
 import PasswordField from '../../../components/form-control/PasswordField';
 
@@ -9,7 +9,6 @@ const RegisterForm = (props) => {
   const form = useForm({
     defaultValues: {
       fullname: '',
-      username: '',
       email: '',
       password: '',
     },
@@ -18,25 +17,18 @@ const RegisterForm = (props) => {
     console.log(values);
   };
   return (
-    <form>
-      <InputField form={form} name="fullname" label="fullname" />
-      <InputField form={form} name="username" label="username" />
-      <InputField form={form} name="email" label="email" />
-      <PasswordField form={form} name="password" label="password" />
-      <Button type="submit" mode="contained" onPress={form.handleSubmit(handleSubmit)}>
-        Register now
-      </Button>
-    </form>
+    <View>
+      <InputField form={form} name="fullname" label="Fullname" />
+      <InputField form={form} name="email" label="Email" />
+      <PasswordField form={form} name="password" label="Password" />
+      <Button type="submit" onPress={form.handleSubmit(handleSubmit)} title="Register" />
+      <View>
+        <Text style={{ color: '#FFF', alignSelf: 'center', marginTop: 12 }}>
+          Do you have an account? <Text style={{ color: '#6D61F2' }}>Login</Text>
+        </Text>
+      </View>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default RegisterForm;
