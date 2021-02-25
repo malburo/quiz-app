@@ -1,14 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Text, View } from 'react-native';
+import Button from '../../../components/Button';
 import InputField from '../../../components/form-control/InputField';
 import PasswordField from '../../../components/form-control/PasswordField';
 
 const LoginForm = (props) => {
   const form = useForm({
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -17,22 +17,16 @@ const LoginForm = (props) => {
   };
   return (
     <View>
-      <InputField form={form} name="username" label="username" />
-      <PasswordField form={form} name="password" label="password" />
-      <Button type="submit" mode="contained" onPress={form.handleSubmit(handleSubmit)}>
-        Login now
-      </Button>
+      <InputField form={form} name="email" label="Email" />
+      <PasswordField form={form} name="password" label="Password" />
+      <Button onPress={form.handleSubmit(handleSubmit)} title="Login" />
+      <View>
+        <Text style={{ color: '#FFF', alignSelf: 'center', marginTop: 12 }}>
+          Don’t have an account? <Text style={{ color: '#6D61F2' }}>Register</Text>
+        </Text>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default LoginForm;
