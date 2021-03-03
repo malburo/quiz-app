@@ -1,19 +1,17 @@
 import React from 'react';
-import { Keyboard, KeyboardAvoidingView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
 import LoginForm from '../components/LoginForm';
 
 const LoginScreen = (props) => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <View style={styles.header}>
-            <Text style={[styles.text, styles.title]}>Login</Text>
-            <Text style={styles.text}>Access Account</Text>
-          </View>
-          <LoginForm />
+      <View style={styles.inner}>
+        <View style={styles.header}>
+          <Text style={[styles.text, styles.title]}>Login</Text>
+          <Text style={styles.text}>Access Account</Text>
         </View>
-      </TouchableWithoutFeedback>
+        <LoginForm />
+      </View>
     </KeyboardAvoidingView>
   );
 };

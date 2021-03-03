@@ -1,11 +1,15 @@
+import { unwrapResult } from '@reduxjs/toolkit';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Button from '../../../components/Button';
 import InputField from '../../../components/form-control/InputField';
 import PasswordField from '../../../components/form-control/PasswordField';
+import { register } from '../authSilce';
 
 const RegisterForm = (props) => {
+  const dispatch = useDispatch()
   const form = useForm({
     defaultValues: {
       fullname: '',
@@ -14,7 +18,11 @@ const RegisterForm = (props) => {
     },
   });
   const handleSubmit = (values) => {
-    console.log(values);
+    try {
+      await dispatch(register(values)).then(unwrapResult);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <View>
