@@ -7,7 +7,7 @@ export const QUESTIONS_DATA = [
         language: 'js',
         content: [
           'function a(x) {',
-          '  x++;}',
+          '  x++;',
           '  return function () {',
           '    console.log(++x);',
           '  };',
