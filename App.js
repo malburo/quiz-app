@@ -1,13 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Quiz from './src/features/quiz/screens/Quiz';
+import { Provider } from 'react-redux';
+import AppNavigator from './AppNavigator';
+import store from './src/app/store';
 
-export default function App() {
+const App = () => {
   return (
-    <View>
-      <Quiz />
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </Provider>
   );
-}
+};
+export default App;

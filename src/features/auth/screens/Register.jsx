@@ -1,27 +1,17 @@
 import React from 'react';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
 import RegisterForm from '../components/RegisterForm';
 
 const KeyboardAvoidingComponent = () => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <View style={styles.header}>
-            <Text style={[styles.text, styles.title]}>Register</Text>
-            <Text style={styles.text}>Create Account</Text>
-          </View>
-          <RegisterForm />
+      <View style={styles.inner}>
+        <View style={styles.header}>
+          <Text style={[styles.text, styles.title]}>Register</Text>
+          <Text style={styles.text}>Create Account</Text>
         </View>
-      </TouchableWithoutFeedback>
+        <RegisterForm />
+      </View>
     </KeyboardAvoidingView>
   );
 };
