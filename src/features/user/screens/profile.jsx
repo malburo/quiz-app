@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
@@ -6,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import AvatarImage from '../../../assets/Saly.png';
 import Button from '../../../components/Button';
 import { logout } from '../../auth/authSilce';
-const ProfileScreen = ({ navigation }) => {
+
+const ProfileScreen = () => {
   const dispatch = useDispatch();
   const handleLogout = async () => {
     await dispatch(logout());
