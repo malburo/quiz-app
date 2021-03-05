@@ -9,7 +9,7 @@ import PasswordField from '../../../components/form-control/PasswordField';
 import { register } from '../authSilce';
 
 const RegisterForm = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const form = useForm({
     defaultValues: {
       fullname: '',
@@ -17,7 +17,7 @@ const RegisterForm = (props) => {
       password: '',
     },
   });
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     try {
       await dispatch(register(values)).then(unwrapResult);
     } catch (error) {

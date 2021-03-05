@@ -26,4 +26,29 @@ export const QUESTIONS_DATA = [
       D: '1, 2, 3 and 3, 3, 3',
     },
   },
+  {
+    id: 'id2',
+    question: {
+      title: 'title',
+      code: {
+        language: 'js',
+        content: [
+          'function Name(a, b) {',
+          '  this.a = a;',
+          '  this.b = b;',
+          '}',
+          '',
+          'const me = Name("Quoc", "Bao");',
+          '',
+          'console.log(!(a.length - window.a.length));',
+        ],
+      },
+    },
+    answers: {
+      A: 'undefined',
+      B: 'NaN',
+      C: 'true',
+      D: 'false',
+    },
+  },
 ];

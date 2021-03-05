@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
-const AnswerForm = ({ answers }) => {
+const AnswerForm = ({ answers, setCount }) => {
   const [Answer, setAnswer] = useState(null);
 
   const handlePressAnswer = (answer) => {
@@ -11,6 +11,8 @@ const AnswerForm = ({ answers }) => {
 
   const handleSubmit = () => {
     console.log(Answer);
+    setCount((prev) => prev + 1);
+    setAnswer(null);
   };
   return (
     <View style={styles.container}>
