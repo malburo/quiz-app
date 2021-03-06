@@ -1,3 +1,4 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { Button, Text, View } from 'react-native';
@@ -17,8 +18,18 @@ function HomeScreen({ navigation }) {
   );
 }
 
-const HomeStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
+const QuizStack = createStackNavigator();
+
+function Home() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
 function AppNavigator() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
@@ -32,11 +43,10 @@ function AppNavigator() {
   return (
     <>
       {isAuth ? (
-        <HomeStack.Navigator>
-          <HomeStack.Screen name="Profile" component={ProfileScreen} />
-          <HomeStack.Screen name="Home" component={HomeScreen} />
-          <HomeStack.Screen name="Quiz" component={Quiz} />
-        </HomeStack.Navigator>
+        <QuizStack.Navigator>
+          <QuizStack.Screen name="Home" component={Home} />
+          <QuizStack.Screen name="Quiz" component={Quiz} />
+        </QuizStack.Navigator>
       ) : (
         <AuthStack.Navigator>
           <AuthStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />

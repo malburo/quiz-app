@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
-import AvatarImage from '../../../assets/Saly.png';
+// import AvatarImage from '../../../assets/Saly.png';
 import Button from '../../../components/Button';
 import { logout } from '../../auth/authSilce';
 
@@ -14,7 +14,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Avatar.Image size={112} source={AvatarImage} />
+        {/* <Avatar.Image size={112} source={AvatarImage} /> */}
         <Text>Your name</Text>
         <Button onPress={handleLogout} title="Logout" />
       </View>

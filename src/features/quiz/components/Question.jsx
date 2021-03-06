@@ -1,12 +1,12 @@
 import json2md from 'json2md';
 import React from 'react';
 import SyntaxHighlighter from 'react-native-syntax-highlighter'; // 2.0.0
-import { dracula } from 'react-syntax-highlighter/styles/hljs'; // 7.0.1
+import { atomOneDark } from 'react-syntax-highlighter/styles/hljs'; // 7.0.1
 
 const Question = ({ question }) => {
   return (
     <SyntaxHighlighter
-      style={dracula}
+      style={atomOneDark}
       customStyle={{ padding: 20, marginTop: 20 }}
       language={question.code.language}
       fontSize={18}
