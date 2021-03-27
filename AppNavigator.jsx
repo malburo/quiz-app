@@ -1,22 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './src/features/auth/authSilce';
 import LoginScreen from './src/features/auth/screens/Login';
 import RegisterScreen from './src/features/auth/screens/Register';
-import Quiz from './src/features/quiz/screens/Quiz';
+import Catalog from './src/features/Exam/screens/Catalog';
+import QuizDetail from './src/features/Exam/screens/QuizDetail';
+import Quizzes from './src/features/Exam/screens/Quizzes';
 import ProfileScreen from './src/features/user/screens/profile';
-
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Catalog Screen</Text>
-      <Button title="Go to Quiz" onPress={() => navigation.navigate('Quiz')} />
-    </View>
-  );
-}
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
@@ -24,9 +17,27 @@ const QuizStack = createStackNavigator();
 
 function Home() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#e91e63',
+      }}
+    >
+      <Tab.Screen
+        name="Topic"
+        component={Catalog}
+        options={{
+          tabBarLabel: 'Topic',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={size} />,
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color={color} size={size} />,
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -45,7 +56,8 @@ function AppNavigator() {
       {isAuth ? (
         <QuizStack.Navigator>
           <QuizStack.Screen name="Home" component={Home} />
-          <QuizStack.Screen name="Quiz" component={Quiz} />
+          <QuizStack.Screen name="Quizzes" component={Quizzes} />
+          <QuizStack.Screen name="QuizDetail" component={QuizDetail} />
         </QuizStack.Navigator>
       ) : (
         <AuthStack.Navigator>

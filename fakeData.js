@@ -5,18 +5,7 @@ export const QUESTIONS_DATA = [
       title: 'title',
       code: {
         language: 'js',
-        content: [
-          'function a(x) {',
-          '  x++;',
-          '  return function () {',
-          '    console.log(++x);',
-          '  };',
-          '}',
-          '',
-          'a(1)();',
-          'a(1)();',
-          'a(1)();',
-        ],
+        content: 'function sum (a, b) {\n return a + b\n}\nsum(1, 2)',
       },
     },
     answers: {
@@ -32,16 +21,7 @@ export const QUESTIONS_DATA = [
       title: 'title',
       code: {
         language: 'js',
-        content: [
-          'function Name(a, b) {',
-          '  this.a = a;',
-          '  this.b = b;',
-          '}',
-          '',
-          'const me = Name("Quoc", "Bao");',
-          '',
-          'console.log(!(a.length - window.a.length));',
-        ],
+        content: 'function sum (a, b) {\n return a + b\n}\nsum(1, 2)',
       },
     },
     answers: {
@@ -50,5 +30,57 @@ export const QUESTIONS_DATA = [
       C: 'true',
       D: 'false',
     },
+  },
+];
+
+export const QUIZZES_DATA = [
+  {
+    id: 'id1',
+    name: 'Javascript',
+    totalQuestions: 10,
+  },
+  {
+    id: 'id2',
+    name: 'Python',
+    totalQuestions: 10,
+  },
+  {
+    id: 'id3',
+    name: 'Java',
+    totalQuestions: 10,
+  },
+  {
+    id: 'id4',
+    name: 'Java',
+    totalQuestions: 10,
+  },
+  {
+    id: 'id5',
+    name: 'Java',
+    totalQuestions: 10,
+  },
+  {
+    id: 'id6',
+    name: 'Java',
+    totalQuestions: 10,
+  },
+];
+
+export const TOPICS_DATA = [
+  {
+    id: 'id1',
+    name: 'Javascript',
+  },
+  {
+    id: 'id2',
+    name: 'Python',
+  },
+  {
+    id: 'id3',
+    name: 'Java',
+  },
+  {
+    id: 'id4',
+    name: 'Java',
   },
 ];
