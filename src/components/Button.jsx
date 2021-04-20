@@ -11,11 +11,9 @@ const Button = ({ onPress, title }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#6D61F2',
-    borderRadius: 18,
+    backgroundColor: '#FF7235',
+    borderRadius: 4,
     paddingVertical: 16,
-    marginVertical: 12,
-    marginHorizontal: 24,
   },
   button: {
     fontSize: 18,

@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 const PasswordField = (props) => {
-  const { form, disabled, name, label, placeholder } = props;
+  const { form, disabled, name, label, placeholder, setIsFocus } = props;
   const { control, errors } = form;
   const hasError = !!errors[name];
   return (
@@ -15,11 +15,14 @@ const PasswordField = (props) => {
       placeholder={placeholder}
       render={(props) => (
         <View style={styles.container}>
-          <Text style={styles.text}>{label}</Text>
           <TextInput
             {...props}
             style={styles.input}
             secureTextEntry={true}
+            onFocus={() => {
+              if (setIsFocus) setIsFocus(true);
+            }}
+            placeholder={placeholder}
             onChangeText={(value) => {
               props.onChange(value);
             }}
@@ -31,13 +34,12 @@ const PasswordField = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: { marginHorizontal: 24, marginVertical: 12, fontSize: 14, fontWeight: '500' },
-  text: { marginBottom: 12, marginLeft: 6, color: '#FFF' },
+  container: { fontSize: 14, fontWeight: '500', marginBottom: 24 },
   input: {
     padding: 16,
-    color: '#FFF',
-    backgroundColor: '#1F1F30',
-    borderRadius: 18,
+    color: '#18172B',
+    backgroundColor: '#F2F3F7',
+    borderRadius: 4,
   },
 });
 export default PasswordField;
