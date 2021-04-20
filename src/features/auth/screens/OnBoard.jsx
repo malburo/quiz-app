@@ -8,7 +8,7 @@ const OnBoardScreen = (props) => {
     <View style={{ backgroundColor: '#130F29', height: '100%' }}>
       <StatusBar barStyle="dark-content" />
       <View>
-        <Image source={require('../../../../assets/login7.png')} style={{ width: '100%', height: 500 }} />
+        <Image source={require('../../../../assets/background.png')} style={{ width: '100%', height: 500 }} />
       </View>
       <View>
         <Text

@@ -1,16 +1,28 @@
-import React from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import RegisterForm from '../components/RegisterForm';
-
-const KeyboardAvoidingComponent = () => {
+const RegisterScreen = (props) => {
+  const [isFocus, setIsFocus] = useState(false);
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
       <View style={styles.inner}>
-        <View style={styles.header}>
-          <Text style={[styles.text, styles.title]}>Register</Text>
-          <Text style={styles.text}>Create Account</Text>
+        <View>
+          <Text style={{ marginTop: 12, color: '#051D3F', fontSize: 36, fontWeight: '700' }}>
+            Sign <Text style={{ color: '#FF7235' }}>Up</Text>
+          </Text>
+          <Text style={{ marginTop: 12 }}>Sign up to continue</Text>
         </View>
-        <RegisterForm />
+        <View>
+          <RegisterForm setIsFocus={setIsFocus} />
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -19,27 +31,19 @@ const KeyboardAvoidingComponent = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#18172B',
+    backgroundColor: '#FAFAFC',
     height: '100%',
   },
   inner: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  header: {
-    fontSize: 36,
-    marginBottom: 80,
+    padding: 24,
+    justifyContent: 'flex-end',
   },
   text: {
     fontSize: 14,
     alignSelf: 'center',
-    color: '#FFF',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 8,
-    fontWeight: '600',
+    color: '#6E80B0',
+    fontWeight: '400',
   },
 });
 
-export default KeyboardAvoidingComponent;
+export default RegisterScreen;

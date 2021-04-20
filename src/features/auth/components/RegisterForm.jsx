@@ -8,13 +8,15 @@ import InputField from '../../../components/form-control/InputField';
 import PasswordField from '../../../components/form-control/PasswordField';
 import { register } from '../authSilce';
 
-const RegisterForm = (props) => {
+const RegisterForm = ({ setIsFocus }) => {
   const dispatch = useDispatch();
   const form = useForm({
     defaultValues: {
       fullname: '',
       email: '',
+      username: '',
       password: '',
+      retypePassword: '',
     },
   });
   const handleSubmit = async (values) => {
@@ -25,14 +27,15 @@ const RegisterForm = (props) => {
     }
   };
   return (
-    <View>
-      <InputField form={form} name="fullname" label="Fullname" />
-      <InputField form={form} name="email" label="Email" />
-      <PasswordField form={form} name="password" label="Password" />
-      <Button type="submit" onPress={form.handleSubmit(handleSubmit)} title="Register" />
+    <View style={{ marginTop: 24 }}>
+      <InputField form={form} name="fullname" placeholder="Fullname*" />
+      <InputField form={form} name="email" placeholder="Email*" />
+      <InputField form={form} name="username" placeholder="Username*" />
+      <PasswordField form={form} name="password" placeholder="Password*" />
+      <Button onPress={form.handleSubmit(handleSubmit)} title="Sign up" />
       <View>
-        <Text style={{ color: '#FFF', alignSelf: 'center', marginTop: 12 }}>
-          Do you have an account? <Text style={{ color: '#6D61F2' }}>Login</Text>
+        <Text style={{ alignSelf: 'center', marginTop: 24, marginBottom: 50 }}>
+          Do have an account? <Text style={{ color: '#FF7235' }}>Login</Text>
         </Text>
       </View>
     </View>

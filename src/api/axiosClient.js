@@ -2,7 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 const request = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'https://quizapp-backend-hutech.herokuapp.com/',
   headers: {
     'content-type': 'application/json',
   },
