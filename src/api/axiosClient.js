@@ -11,10 +11,10 @@ const request = axios.create({
 
 request.interceptors.request.use(
   (config) => {
-    const token = '123';
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
+    // const token = localStorage.getItem(StorageKeys.ACCESS_TOKEN);
+    // if (token) {
+    //   config.headers['Authorization'] = `Bearer ${token}`;
+    // }
     return config;
   },
   (error) => Promise.reject(error.response.data.error || error.message)
@@ -22,19 +22,9 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    if (response && response.data) {
-      return response.data.data;
-    }
-    return response;
+    return response.data;
   },
   async (error) => {
-    // if (error.response.status === 403) {
-    //   localStorage.removeItem(StorageKeys.ACCESS_TOKEN);
-    //   window.location.replace('/auth/login');
-    // }
-    // if (error.response.status === 404) {
-    //   window.location.replace('/404');
-    // }
     return Promise.reject(error.response.data.error || error.message);
   }
 );
