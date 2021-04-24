@@ -69,18 +69,36 @@ export const QUIZZES_DATA = [
 export const TOPICS_DATA = [
   {
     id: 'id1',
-    name: 'Javascript',
+    name: 'In Javascript We Just',
+    imageUrl:
+      'https://techvccloud.mediacdn.vn/zoom/650_406/2018/11/23/js-15429579443112042672363-crop-1542957949936317424252.png',
   },
   {
     id: 'id2',
     name: 'Python',
+    imageUrl: 'https://www.tshirtgeek.com.br/wp-content/uploads/2020/07/python-5.jpg',
   },
   {
     id: 'id3',
     name: 'Java',
+    imageUrl: 'https://codelearn.io/Upload/Blog/nhung-loi-thuong-gap-khi-lap-trinh-java-63725972059.7478.jpg',
   },
   {
     id: 'id4',
     name: 'Java',
+    imageUrl:
+      'https://techvccloud.mediacdn.vn/zoom/650_406/2018/11/23/js-15429579443112042672363-crop-1542957949936317424252.png',
+  },
+  {
+    id: 'id5',
+    name: 'Java',
+    imageUrl:
+      'https://techvccloud.mediacdn.vn/zoom/650_406/2018/11/23/js-15429579443112042672363-crop-1542957949936317424252.png',
+  },
+  {
+    id: 'id6',
+    name: 'Java',
+    imageUrl:
+      'https://techvccloud.mediacdn.vn/zoom/650_406/2018/11/23/js-15429579443112042672363-crop-1542957949936317424252.png',
   },
 ];

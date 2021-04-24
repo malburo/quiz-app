@@ -4,12 +4,12 @@ import * as React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './src/features/auth/authSilce';
-import LoginScreen from './src/features/auth/screens/Login';
-import OnBoardScreen from './src/features/auth/screens/OnBoard';
-import RegisterScreen from './src/features/auth/screens/Register';
-import Catalog from './src/features/Exam/screens/Catalog';
-import QuizDetail from './src/features/Exam/screens/QuizDetail';
-import Quizzes from './src/features/Exam/screens/Quizzes';
+import LoginScreen from './src/features/auth/screens/LoginScreen';
+import OnBoardScreen from './src/features/auth/screens/OnBoardScreen';
+import RegisterScreen from './src/features/auth/screens/RegisterScreen';
+import QuestionScreen from './src/features/Exam/screens/QuestionScreen';
+import QuizScreen from './src/features/Exam/screens/QuizScreen';
+import TopicScreen from './src/features/Exam/screens/TopicScreen';
 import ProfileScreen from './src/features/User/screens/Profile';
 
 const Tab = createBottomTabNavigator();
@@ -25,9 +25,8 @@ function Home() {
     >
       <Tab.Screen
         name="Topic"
-        component={Catalog}
+        component={TopicScreen}
         options={{
-          tabBarLabel: 'Topic',
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={size} />,
         }}
       />
@@ -35,7 +34,6 @@ function Home() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color={color} size={size} />,
         }}
       />
@@ -56,9 +54,18 @@ function AppNavigator() {
     <>
       {isAuth ? (
         <QuizStack.Navigator>
-          <QuizStack.Screen name="Home" component={Home} />
-          <QuizStack.Screen name="Quizzes" component={Quizzes} />
-          <QuizStack.Screen name="QuizDetail" component={QuizDetail} />
+          <QuizStack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              headerTitle: false,
+              headerStyle: {
+                height: 48,
+              },
+            }}
+          />
+          <QuizStack.Screen name="Quiz" component={QuizScreen} />
+          <QuizStack.Screen name="Question" component={QuestionScreen} />
         </QuizStack.Navigator>
       ) : (
         <AuthStack.Navigator>
