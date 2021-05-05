@@ -3,29 +3,27 @@ import { Controller } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 const InputField = (props) => {
-  const { form, disabled, name, label, placeholder, setIsFocus } = props;
-  const { control, errors } = form;
+  const { form, disabled, name, label, placeholder } = props;
+  const { errors } = form.formState;
   const hasError = !!errors[name];
   return (
     <Controller
-      control={control}
+      control={form.control}
       name={name}
       error={hasError}
       disabled={disabled}
       placeholder={placeholder}
-      render={(props) => (
+      render={({ field: { onChange, onBlur } }) => (
         <View style={styles.container}>
           <TextInput
-            {...props}
+            onBlur={onBlur}
+            onChange={onChange}
             style={styles.input}
-            onFocus={() => {
-              if (setIsFocus) setIsFocus(true);
-            }}
             placeholder={placeholder}
-            onChangeText={(value) => {
-              props.onChange(value);
-            }}
+            placeholderTextColor="white"
+            selectionColor="white"
           />
+          <Text style={{ color: '#B23939' }}>{errors[name]?.message}</Text>
         </View>
       )}
     />
@@ -33,11 +31,11 @@ const InputField = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: { fontSize: 14, fontWeight: '500', marginBottom: 24 },
+  container: { fontSize: 14, fontWeight: '500', marginBottom: 24, color: 'white' },
   input: {
     padding: 16,
-    color: '#18172B',
-    backgroundColor: '#F2F3F7',
+    color: 'white',
+    backgroundColor: '#454f59',
     borderRadius: 4,
   },
 });
