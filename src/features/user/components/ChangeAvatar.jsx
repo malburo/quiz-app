@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Button from '../../../components/Button';
-import * as ImagePicker from 'expo-image-picker';
-import { Image, Platform, View } from 'react-native';
 import axios from 'axios';
-const ChangeAvatar = () => {
-  const [image, setImage] = useState(null);
+import * as ImagePicker from 'expo-image-picker';
+import React, { useEffect } from 'react';
+import { Image, Platform, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import { changeAvatar } from '../../auth/authSilce';
+
+const ChangeAvatar = ({ currentUser }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -17,28 +20,44 @@ const ChangeAvatar = () => {
   }, []);
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+        base64: true,
+      });
 
-    if (!result.cancelled) {
-      setImage(result.uri);
-      console.log(result);
-      const formData = new FormData();
-      formData.append('file', result.uri);
-      formData.append('upload_preset', 'y6uwotih');
-      const image = await axios.post('https://api.Cloudinary.com/v1_1/malburo/image/upload', formData);
+      if (!result.cancelled) {
+        if (Platform.OS === 'web') {
+          const formData = new FormData();
+          formData.append('file', result.uri);
+          formData.append('upload_preset', 'y6uwotih');
+          const image = await axios.post('https://api.Cloudinary.com/v1_1/malburo/image/upload', formData);
+          const payload = { userId: currentUser.userId, data: { imgUrl: image.data.secure_url } };
+          await dispatch(changeAvatar(payload));
+          return;
+        }
+        const formData = new FormData();
+        formData.append('file', `data:image/jpg;base64,${result.base64}`);
+        formData.append('upload_preset', 'y6uwotih');
+
+        const image = await axios.post('https://api.Cloudinary.com/v1_1/malburo/image/upload', formData);
+        const payload = { userId: currentUser.userId, data: { imgUrl: image.data.secure_url } };
+        await dispatch(changeAvatar(payload));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <View>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-    </View>
+    <TouchableOpacity onPress={pickImage}>
+      <View style={{ borderColor: '#3475da', borderWidth: 5, padding: 12, borderRadius: 24 }}>
+        <Image source={{ uri: currentUser.imageUrl }} style={{ width: 80, height: 80, borderRadius: 12 }} />
+      </View>
+    </TouchableOpacity>
   );
 };
 

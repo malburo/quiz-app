@@ -1,32 +1,136 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Avatar } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-// import AvatarImage from '../../../assets/Saly.png';
-import Button from '../../../components/Button';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { IconButton } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../auth/authSilce';
+import ChangeAvatar from '../components/ChangeAvatar';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.current);
   const handleLogout = async () => {
     await dispatch(logout());
   };
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <ScrollView style={{ height: '100%', backgroundColor: '#2F3237', padding: 24 }}>
       <View>
-        {/* <Avatar.Image size={112} source={AvatarImage} /> */}
-        <Text>Your name</Text>
-        <Button onPress={handleLogout} title="Logout" />
+        <View
+          style={{
+            display: 'flex',
+            width: '100%',
+            alignItems: 'center',
+          }}
+        >
+          <ChangeAvatar currentUser={currentUser} />
+          <View>
+            <Text style={{ fontSize: 24, fontWeight: '600', color: 'white', margin: 24 }}>{currentUser.fullName}</Text>
+          </View>
+        </View>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 24,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: '#454f59',
+              width: 150,
+              height: 80,
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 32 }}>20</Text>
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 16 }}>Streak</Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: '#454f59',
+              width: 150,
+              height: 80,
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 32 }}>600</Text>
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 16 }}>Point</Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            display: 'flex',
+            borderWidth: 1,
+            borderColor: '#454f59',
+            borderRadius: 8,
+            backgroundColor: '#2a2b2f',
+          }}
+        >
+          <View style={{ padding: 24 }}>
+            <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8, color: 'white' }}>FullName</Text>
+            <Text style={{ fontSize: 12, color: 'white' }}>Quoc Bao</Text>
+          </View>
+          <View style={{ borderColor: '#454f59', borderWidth: 0.5 }}></View>
+          <View style={{ padding: 24 }}>
+            <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8, color: 'white' }}>Email</Text>
+            <Text style={{ fontSize: 12, color: 'white' }}>123@gmail.com</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate('ChangePassword')}>
+          <View style={styles.list}>
+            <View style={{ paddingHorizontal: 12 }}>
+              <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>Change password</Text>
+            </View>
+            <View>
+              <IconButton icon="arrow-right-drop-circle" color="white" style={{ margin: 0 }} />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleLogout}>
+          <View
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginTop: 24,
+              padding: 12,
+              borderRadius: 8,
+              backgroundColor: '#B23939',
+            }}
+          >
+            <View style={{ paddingHorizontal: 12, marginTop: 6, marginBottom: 6 }}>
+              <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>Logout</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#18172B',
-    height: '100%',
+  list: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 24,
+    borderWidth: 1,
+    borderColor: '#454f59',
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: '#2a2b2f',
   },
 });
 
