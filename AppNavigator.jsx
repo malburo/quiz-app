@@ -1,9 +1,12 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuth } from './src/features/auth/authSilce';
+import { checkAuth, getMe } from './src/features/auth/authSilce';
+import ChangePasswordScreen from './src/features/auth/screens/ChangePasswordScreen';
+import ForgotPassword from './src/features/auth/screens/ForgotPasswordScreen';
 import LoginScreen from './src/features/auth/screens/LoginScreen';
 import OnBoardScreen from './src/features/auth/screens/OnBoardScreen';
 import RegisterScreen from './src/features/auth/screens/RegisterScreen';
@@ -17,10 +20,25 @@ const AuthStack = createStackNavigator();
 const QuizStack = createStackNavigator();
 
 function Home() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const getInfo = async () => {
+      const token = await AsyncStorage.getItem('@access_token');
+      if (token) dispatch(getMe());
+    };
+    getInfo();
+  }, [dispatch]);
+
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#e91e63',
+        style: {
+          backgroundColor: '#2a2b2f',
+          borderTopColor: '#454f59',
+        },
+        showLabel: false,
+        activeTintColor: 'white',
       }}
     >
       <Tab.Screen
@@ -35,6 +53,7 @@ function Home() {
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color={color} size={size} />,
+          headerShown: true,
         }}
       />
     </Tab.Navigator>
@@ -50,6 +69,7 @@ function AppNavigator() {
     };
     check();
   }, []);
+
   return (
     <>
       {isAuth ? (
@@ -58,14 +78,48 @@ function AppNavigator() {
             name="Home"
             component={Home}
             options={{
-              headerTitle: false,
               headerStyle: {
                 height: 48,
+                backgroundColor: '#2F3237',
+                borderColor: '#454f59',
+                shadowColor: 'transparent',
+              },
+              headerTitle: false,
+            }}
+          />
+          <QuizStack.Screen
+            name="Quiz"
+            component={QuizScreen}
+            options={{
+              headerTitle: false,
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: '#454f59',
+                borderColor: '#454f59',
+                shadowColor: 'transparent',
               },
             }}
           />
-          <QuizStack.Screen name="Quiz" component={QuizScreen} />
-          <QuizStack.Screen name="Question" component={QuestionScreen} />
+          <QuizStack.Screen
+            name="Question"
+            component={QuestionScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <QuizStack.Screen
+            name="ChangePassword"
+            component={ChangePasswordScreen}
+            options={{
+              headerTitle: false,
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: '#454f59',
+                borderColor: '#454f59',
+                shadowColor: 'transparent',
+              },
+            }}
+          />
         </QuizStack.Navigator>
       ) : (
         <AuthStack.Navigator>
@@ -80,6 +134,12 @@ function AppNavigator() {
             name="Login"
             component={LoginScreen}
             options={{
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: '#2F3237',
+                borderColor: '#454f59',
+                shadowColor: 'transparent',
+              },
               headerTitle: false,
             }}
           />
@@ -87,6 +147,25 @@ function AppNavigator() {
             name="Register"
             component={RegisterScreen}
             options={{
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: '#2F3237',
+                borderColor: '#454f59',
+                shadowColor: 'transparent',
+              },
+              headerTitle: false,
+            }}
+          />
+          <AuthStack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{
+              headerTintColor: 'white',
+              headerStyle: {
+                backgroundColor: '#2F3237',
+                borderColor: '#454f59',
+                shadowColor: 'transparent',
+              },
               headerTitle: false,
             }}
           />
