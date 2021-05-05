@@ -1,7 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import * as yup from 'yup';
 import authApi from '../../../api/authApi';
 import InputField from '../../../components/form-control/InputField';
@@ -17,6 +18,7 @@ const schema = yup.object().shape({
 
 const ForgotPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const form = useForm({
     defaultValues: {
       email: '',
@@ -28,6 +30,7 @@ const ForgotPasswordForm = () => {
       setIsLoading(true);
       const payload = { email: values.email };
       await authApi.forgotPassword(payload);
+      setIsSuccess(true);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -35,10 +38,16 @@ const ForgotPasswordForm = () => {
   };
   return (
     <View style={{ marginTop: 24 }}>
-      <InputField form={form} name="email" placeholder="Email*" />
-      <TouchableOpacity onPress={form.handleSubmit(handleSubmit)} style={styles.container}>
-        {isLoading ? <ActivityIndicator color="white" /> : <Text style={styles.button}>Next</Text>}
-      </TouchableOpacity>
+      {isSuccess ? (
+        <Text style={styles.button}>Email has been sent</Text>
+      ) : (
+        <>
+          <InputField form={form} name="email" placeholder="Email*" />
+          <TouchableOpacity onPress={form.handleSubmit(handleSubmit)} style={styles.container}>
+            {isLoading ? <ActivityIndicator color="white" /> : <Text style={styles.button}>Next</Text>}
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   );
 };
