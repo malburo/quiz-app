@@ -17,7 +17,7 @@ const InputField = (props) => {
         <View style={styles.container}>
           <TextInput
             onBlur={onBlur}
-            onChange={onChange}
+            onChangeText={(value) => onChange(value)}
             style={styles.input}
             placeholder={placeholder}
             placeholderTextColor="white"

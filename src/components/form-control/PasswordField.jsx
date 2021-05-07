@@ -17,7 +17,7 @@ const PasswordField = (props) => {
         <View style={styles.container}>
           <TextInput
             onBlur={onBlur}
-            onChange={onChange}
+            onChangeText={(value) => onChange(value)}
             style={styles.input}
             secureTextEntry={true}
             placeholder={placeholder}
