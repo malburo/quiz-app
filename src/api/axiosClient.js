@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { Restart } from 'fiction-expo-restart';
 import queryString from 'query-string';
-
 const request = axios.create({
   baseURL: 'https://quizapp-backend-hutech.herokuapp.com/',
   headers: {
@@ -27,6 +26,7 @@ request.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401 && error.response.data.message === 'Token-expired') {
       await AsyncStorage.removeItem('@access_token');
+      Restart();
     }
     return Promise.reject(error.response.data || error.message);
   }
