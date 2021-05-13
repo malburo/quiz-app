@@ -14,7 +14,7 @@ import QuestionScreen from './src/features/Exam/screens/QuestionScreen';
 import QuizScreen from './src/features/Exam/screens/QuizScreen';
 import TopicScreen from './src/features/Exam/screens/TopicScreen';
 import ProfileScreen from './src/features/User/screens/Profile';
-
+import LeaderBoardScreen from './src/features/Exam/screens/LeaderBoardScreen';
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator();
 const QuizStack = createStackNavigator();
@@ -42,12 +42,23 @@ function Home() {
       }}
     >
       <Tab.Screen
+        name="LeaderBoard"
+        component={LeaderBoardScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="align-vertical-bottom" color={color} size={size} />
+          ),
+          headerShown: true,
+        }}
+      />
+      <Tab.Screen
         name="Topic"
         component={TopicScreen}
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={size} />,
         }}
       />
+
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
