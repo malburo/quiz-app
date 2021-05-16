@@ -42,8 +42,9 @@ const ChangeAvatar = ({ currentUser }) => {
         const formData = new FormData();
         formData.append('file', `data:image/jpg;base64,${result.base64}`);
         formData.append('upload_preset', 'y6uwotih');
-
+        console.log(formData);
         const image = await axios.post('https://api.Cloudinary.com/v1_1/malburo/image/upload', formData);
+        console.log(image);
         const payload = { userId: currentUser.userId, data: { imgUrl: image.data.secure_url } };
         await dispatch(changeAvatar(payload));
       }

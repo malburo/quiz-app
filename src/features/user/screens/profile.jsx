@@ -21,6 +21,7 @@ const ProfileScreen = () => {
             display: 'flex',
             width: '100%',
             alignItems: 'center',
+            marginTop: 40,
           }}
         >
           <ChangeAvatar currentUser={currentUser} />

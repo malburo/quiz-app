@@ -49,6 +49,9 @@ function Home() {
             <MaterialCommunityIcons name="align-vertical-bottom" color={color} size={size} />
           ),
           headerShown: true,
+          headerStyle: {
+            backgroundColor: 'white',
+          },
         }}
       />
       <Tab.Screen
@@ -89,13 +92,7 @@ function AppNavigator() {
             name="Home"
             component={Home}
             options={{
-              headerStyle: {
-                height: 48,
-                backgroundColor: '#2F3237',
-                borderColor: '#454f59',
-                shadowColor: 'transparent',
-              },
-              headerTitle: false,
+              headerShown: false,
             }}
           />
           <QuizStack.Screen
@@ -105,8 +102,8 @@ function AppNavigator() {
               headerTitle: false,
               headerTintColor: 'white',
               headerStyle: {
-                backgroundColor: '#454f59',
-                borderColor: '#454f59',
+                backgroundColor: '#2F3237',
+                borderColor: '#2F3237',
                 shadowColor: 'transparent',
               },
             }}
