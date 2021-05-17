@@ -1,14 +1,22 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../auth/authSilce';
+import { getMe, logout } from '../../auth/authSilce';
 import ChangeAvatar from '../components/ChangeAvatar';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.current);
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    (async () => {
+      if (isFocused) {
+        await dispatch(getMe());
+      }
+    })();
+  }, [isFocused]);
   const handleLogout = async () => {
     await dispatch(logout());
   };
@@ -50,8 +58,8 @@ const ProfileScreen = () => {
               justifyContent: 'center',
             }}
           >
-            <Text style={{ color: 'white', fontWeight: '800', fontSize: 32 }}>20</Text>
-            <Text style={{ color: 'white', fontWeight: '800', fontSize: 16 }}>Streak</Text>
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 32 }}>{currentUser.learningStreaks}</Text>
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 16 }}>streak</Text>
           </View>
           <View
             style={{
@@ -64,7 +72,7 @@ const ProfileScreen = () => {
               justifyContent: 'center',
             }}
           >
-            <Text style={{ color: 'white', fontWeight: '800', fontSize: 32 }}>600</Text>
+            <Text style={{ color: 'white', fontWeight: '800', fontSize: 32 }}>{currentUser.point}</Text>
             <Text style={{ color: 'white', fontWeight: '800', fontSize: 16 }}>Point</Text>
           </View>
         </View>
