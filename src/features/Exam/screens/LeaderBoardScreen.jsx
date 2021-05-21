@@ -1,17 +1,22 @@
+import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import defaultAvatar from '../../../../assets/default-avatar.jpg';
 import Top1 from '../../../../assets/Top1.png';
 import Top2 from '../../../../assets/Top2.png';
 import Top3 from '../../../../assets/Top3.png';
 import userApi from '../../../api/userApi';
 const LeaderBoardScreen = (props) => {
   const [leaderBoard, setLeaderBoard] = useState([]);
+  const isFocused = useIsFocused();
   useEffect(() => {
     (async () => {
-      const response = await userApi.leaderBoard();
-      console.log(response);
+      if (isFocused) {
+        const response = await userApi.leaderBoard();
+        setLeaderBoard(response);
+      }
     })();
-  }, []);
+  }, [isFocused]);
   return (
     <View style={styles.container}>
       <View style={{ height: 360, backgroundColor: '#2a2b2f', marginTop: 40 }}>
@@ -42,12 +47,17 @@ const LeaderBoardScreen = (props) => {
         >
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <View>
-              <Image
-                source={{
-                  uri: 'https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/91559621_2324523201175704_4230156291042967552_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=JbjiI1yz5WIAX8bS--R&_nc_ht=scontent-hkg4-1.xx&oh=aea45ba67c72aef10b9b137bec2ef95e&oe=60B863E3',
-                }}
-                style={{ width: 110, height: 110, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
-              />
+              {leaderBoard[1]?.imageUrl === '' || leaderBoard[1]?.imageUrl === null ? (
+                <Image
+                  source={defaultAvatar}
+                  style={{ width: 110, height: 110, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
+                />
+              ) : (
+                <Image
+                  source={{ uri: leaderBoard[1]?.imageUrl }}
+                  style={{ width: 110, height: 110, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
+                />
+              )}
             </View>
             <Image
               source={Top2}
@@ -74,11 +84,11 @@ const LeaderBoardScreen = (props) => {
                     marginTop: 36,
                   }}
                 >
-                  500 <Text style={{ color: 'white', fontSize: 14, fontWeight: '400' }}>point</Text>
+                  {leaderBoard[1]?.point} <Text style={{ color: 'white', fontSize: 14, fontWeight: '400' }}>point</Text>
                 </Text>
               </View>
               <View>
-                <Text style={{ color: 'white', textAlign: 'center' }}>Quoc bao</Text>
+                <Text style={{ color: 'white', textAlign: 'center' }}>{leaderBoard[1]?.fullName} </Text>
               </View>
             </View>
           </View>
@@ -94,12 +104,17 @@ const LeaderBoardScreen = (props) => {
             }}
           >
             <View>
-              <Image
-                source={{
-                  uri: 'https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/91559621_2324523201175704_4230156291042967552_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=JbjiI1yz5WIAX8bS--R&_nc_ht=scontent-hkg4-1.xx&oh=aea45ba67c72aef10b9b137bec2ef95e&oe=60B863E3',
-                }}
-                style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
-              />
+              {leaderBoard[0]?.imageUrl === '' || leaderBoard[0]?.imageUrl === null ? (
+                <Image
+                  source={defaultAvatar}
+                  style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
+                />
+              ) : (
+                <Image
+                  source={{ uri: leaderBoard[0]?.imageUrl }}
+                  style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
+                />
+              )}
             </View>
             <Image
               source={Top1}
@@ -126,22 +141,27 @@ const LeaderBoardScreen = (props) => {
                     marginTop: 36,
                   }}
                 >
-                  500 <Text style={{ color: 'white', fontSize: 14, fontWeight: '400' }}>point</Text>
+                  {leaderBoard[0]?.point} <Text style={{ color: 'white', fontSize: 14, fontWeight: '400' }}>point</Text>
                 </Text>
               </View>
               <View>
-                <Text style={{ color: 'white', textAlign: 'center' }}>Quoc bao</Text>
+                <Text style={{ color: 'white', textAlign: 'center' }}>{leaderBoard[0]?.fullName} </Text>
               </View>
             </View>
           </View>
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <View>
-              <Image
-                source={{
-                  uri: 'https://scontent-hkg4-1.xx.fbcdn.net/v/t1.6435-9/91559621_2324523201175704_4230156291042967552_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=JbjiI1yz5WIAX8bS--R&_nc_ht=scontent-hkg4-1.xx&oh=aea45ba67c72aef10b9b137bec2ef95e&oe=60B863E3',
-                }}
-                style={{ width: 110, height: 110, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
-              />
+              {leaderBoard[2]?.imageUrl === '' || leaderBoard[2]?.imageUrl === null ? (
+                <Image
+                  source={defaultAvatar}
+                  style={{ width: 110, height: 110, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
+                />
+              ) : (
+                <Image
+                  source={{ uri: leaderBoard[2]?.imageUrl }}
+                  style={{ width: 110, height: 110, borderRadius: 100, borderWidth: 3, borderColor: 'white' }}
+                />
+              )}
             </View>
             <Image
               source={Top3}
@@ -168,94 +188,37 @@ const LeaderBoardScreen = (props) => {
                     marginTop: 36,
                   }}
                 >
-                  500 <Text style={{ color: 'white', fontSize: 14, fontWeight: '400' }}>point</Text>
+                  {leaderBoard[2]?.point} <Text style={{ color: 'white', fontSize: 14, fontWeight: '400' }}>point</Text>
                 </Text>
               </View>
               <View>
-                <Text style={{ color: 'white', textAlign: 'center' }}>Quoc bao</Text>
+                <Text style={{ color: 'white', textAlign: 'center' }}>{leaderBoard[2]?.fullName} </Text>
               </View>
             </View>
           </View>
         </View>
       </View>
       <View style={{ padding: 24 }}>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
-        <View
-          style={{ flexDirection: 'row', alignContent: 'center', justifyContent: 'space-between', marginBottom: 24 }}
-        >
-          <View style={{ flexDirection: 'row', alignContent: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>4th</Text>
-            <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>Quoc bao</Text>
-          </View>
-          <View>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>95 pts</Text>
-          </View>
-        </View>
+        {leaderBoard.length > 0 &&
+          leaderBoard.splice(3).map((item, index) => (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignContent: 'center',
+                justifyContent: 'space-between',
+                marginBottom: 24,
+              }}
+              key={item.userId}
+            >
+              <View style={{ flexDirection: 'row', alignContent: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>{index + 4}th</Text>
+                <Text style={{ marginLeft: 24, color: 'white', fontSize: 18, fontWeight: '600' }}>{item.fullName}</Text>
+              </View>
+              <View>
+                <Text style={{ color: 'white', fontSize: 18, fontWeight: '400' }}>{item.point} pts</Text>
+              </View>
+            </View>
+          ))}
       </View>
     </View>
   );
