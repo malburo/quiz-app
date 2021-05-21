@@ -42,6 +42,14 @@ function Home() {
       }}
     >
       <Tab.Screen
+        name="Topic"
+        component={TopicScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={size} />,
+        }}
+      />
+
+      <Tab.Screen
         name="LeaderBoard"
         component={LeaderBoardScreen}
         options={{
@@ -54,14 +62,6 @@ function Home() {
           },
         }}
       />
-      <Tab.Screen
-        name="Topic"
-        component={TopicScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="home" color={color} size={size} />,
-        }}
-      />
-
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}

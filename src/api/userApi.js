@@ -10,5 +10,8 @@ const userApi = {
   changePassword: (payload) => {
     return axiosClient.post(`users/${payload.userId}/change_password`, payload.data);
   },
+  leaderBoard: () => {
+    return axiosClient.get(`leaderboard`);
+  },
 };
 export default userApi;
