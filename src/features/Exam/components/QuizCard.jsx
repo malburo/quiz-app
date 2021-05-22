@@ -1,34 +1,50 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Card, IconButton } from 'react-native-paper';
 
-const QuizCard = () => {
+const QuizCard = ({ quiz, index }) => {
   const navigation = useNavigation();
   return (
-    <View style={{ marginBottom: 24 }}>
-      <Card.Title
-        title="Card Title"
-        right={(props) => (
-          <IconButton
-            {...props}
-            icon="arrow-right-drop-circle"
-            onPress={() => navigation.navigate('QuizDetail')}
-            color="#376AED"
-          />
-        )}
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('Question', {
+          quizId: quiz.quizId,
+        })
+      }
+    >
+      <View
         style={{
-          height: 60,
-          backgroundColor: '#F4F7FA',
-          borderLeftWidth: 20,
-          borderRadius: 12,
-          borderLeftColor: '#376AED',
-          padding: 12,
-          borderTopRightRadius: 12,
-          borderBottomRightRadius: 12,
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginVertical: 12,
+          borderWidth: 1,
+          borderColor: '#454f59',
+          backgroundColor: '#2a2b2f',
+          borderRadius: 9,
         }}
-      />
-    </View>
+      >
+        <View
+          style={{
+            backgroundColor: '#454f59',
+            borderTopLeftRadius: 8,
+            borderBottomLeftRadius: 8,
+            width: 70,
+            height: 80,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Text style={{ fontSize: 30, fontWeight: '800', color: 'white', margin: 0 }}>{index + 1}</Text>
+        </View>
+        <View style={{ paddingHorizontal: 24 }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>{quiz.quizName}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 export default QuizCard;

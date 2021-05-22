@@ -1,25 +1,37 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import Button from '../../../components/Button';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-function TopicCard() {
+function TopicCard({ topic, totalQuiz }) {
   const navigation = useNavigation();
   return (
-    <View style={{ marginTop: 24, backgroundColor: '#F4F7FA', height: 450, borderRadius: 24 }}>
-      <Image
-        style={{ width: '100%', height: 250, borderRadius: 24 }}
-        source={{
-          uri:
-            'https://techvccloud.mediacdn.vn/zoom/650_406/2018/11/23/js-15429579443112042672363-crop-1542957949936317424252.png',
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Quiz', {
+          topicId: topic.topicId,
+        });
+      }}
+    >
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginVertical: 12,
+          borderWidth: 1,
+          borderColor: '#454f59',
+          padding: 12,
+          borderRadius: 8,
+          backgroundColor: '#2a2b2f',
         }}
-      />
-      <View style={{ paddingVertical: 12, paddingHorizontal: 24 }}>
-        <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8 }}>Javascript we trust</Text>
-        <Text style={{ fontSize: 12 }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit</Text>
+      >
+        <Image style={{ width: 75, height: 75, borderRadius: 8 }} source={{ uri: topic.coverImageUrl }} />
+        <View style={{ paddingVertical: 12, paddingHorizontal: 24 }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8, color: 'white' }}>{topic.topicName}</Text>
+          <Text style={{ fontSize: 12, color: 'white' }}>{totalQuiz} quiz</Text>
+        </View>
       </View>
-      <Button title="Learn now!" onPress={() => navigation.navigate('Quizzes')} />
-    </View>
+    </TouchableOpacity>
   );
 }
 export default TopicCard;
