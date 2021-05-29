@@ -77,9 +77,11 @@ const TopicScreen = ({ navigation }) => {
       <View>
         <Text style={{ fontSize: 24, fontWeight: '700', marginVertical: 12, color: 'white' }}>Topics</Text>
       </View>
-      {filteredTopics.map((item) => (
-        <TopicCard navigation={navigation} topic={item.topic} totalQuiz={item.totalQuiz} key={item.topic.topicId} />
-      ))}
+      <View style={{ marginBottom: 24 }}>
+        {filteredTopics.map((item) => (
+          <TopicCard navigation={navigation} topic={item.topic} totalQuiz={item.totalQuiz} key={item.topic.topicId} />
+        ))}
+      </View>
     </ScrollView>
   );
 };

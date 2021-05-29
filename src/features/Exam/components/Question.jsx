@@ -102,7 +102,6 @@ const styles = (props) =>
       backgroundColor: '#2a2b2f',
       paddingHorizontal: 15,
       paddingVertical: 20,
-      borderRadius: 5,
       color: 'white',
     },
     focusAnswer: {
@@ -110,11 +109,10 @@ const styles = (props) =>
       fontSize: 16,
       margin: 10,
       borderWidth: 2,
-      backgroundColor: props === 'normal' ? '#F8BB86' : props === 'right' ? 'blue' : 'red',
-      borderColor: props === 'normal' ? 'white' : '#272c33',
+      backgroundColor: props === 'normal' ? '#F8BB86' : props === 'right' ? '#61e176' : '#B23939',
+      borderColor: props === 'normal' ? 'white' : props === 'right' ? '#61e176' : '#B23939',
       paddingHorizontal: 15,
       paddingVertical: 20,
-      borderRadius: 5,
     },
   });
 
