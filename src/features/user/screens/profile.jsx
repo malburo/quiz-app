@@ -88,12 +88,12 @@ const ProfileScreen = () => {
         >
           <View style={{ padding: 24 }}>
             <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8, color: 'white' }}>FullName</Text>
-            <Text style={{ fontSize: 12, color: 'white' }}>Quoc Bao</Text>
+            <Text style={{ fontSize: 12, color: 'white' }}>{currentUser.fullName}</Text>
           </View>
           <View style={{ borderColor: '#454f59', borderWidth: 0.5 }}></View>
           <View style={{ padding: 24 }}>
             <Text style={{ fontSize: 16, fontWeight: '600', marginBottom: 8, color: 'white' }}>Email</Text>
-            <Text style={{ fontSize: 12, color: 'white' }}>123@gmail.com</Text>
+            <Text style={{ fontSize: 12, color: 'white' }}>{currentUser.email}</Text>
           </View>
         </View>
 
